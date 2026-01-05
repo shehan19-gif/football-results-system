@@ -81,7 +81,7 @@ async function getScores(day, month, year) {
                 "div.ssrcss-nvj22c-WithInlineFallback-TeamAway span.emlpoi30"
             );
             
-            await safeText(page, "div.ssrcss-x07iau-Venue");
+            const venue = await safeText(page, "div.ssrcss-x07iau-Venue");
 
             const matchDay = new Date(date.trim());
             const formattedDate = `${String(matchDay.getDate()).padStart(2,"0")}-${String(matchDay.getMonth() + 1).padStart(2, "0")}-${matchDay.getFullYear()}`;
