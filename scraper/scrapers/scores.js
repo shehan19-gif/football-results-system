@@ -1,5 +1,4 @@
 const puppeteer = require("puppeteer");
-require("dotenv").config({path: "../../.env"});
 
 async function safeText(page, selector) {
   try {

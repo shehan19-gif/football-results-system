@@ -24,4 +24,5 @@ jobs:
       - name: Run scraper
         env:
           CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+          LINK: ${{ secrets.LINK }}
         run: node scraper/index.js
