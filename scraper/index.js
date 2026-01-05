@@ -1,8 +1,9 @@
 require("dotenv").config({path: "../../.env"});
+const path = require("path");
 const mongoose = require("mongoose");
-const { datePicker } = require("../scrapers/scores");
-const dbConnection = require("../../shared/config/db-connection");
-const { saveMatches } = require("../scraper/services/service");
+const { datePicker } = require(path.join(__dirname, "scrapers", "scores"));
+const dbConnection = require(path.join(__dirname, "../../shared/config/db-connection"));
+const { saveMatches } = require(path.join(__dirname, "../scraper/services/service"));
 
 dbConnection(process.env.CONNECTION_STRING)
     .catch(err => console.log("Error: ", err));

@@ -1,4 +1,5 @@
-const Match = require("../../shared/models/Match");
+const path = require("path");
+const Match = require(path.join(__dirname, "../../shared/models/Match"));
 
 async function saveMatches(matches) {
     
