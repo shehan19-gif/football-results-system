@@ -8,9 +8,9 @@ async function safeText(page, selector) {
   }
 }
 
-async function safeAttr(page, selector, attr) {
+async function safeAttr(page, selector) {
   try {
-    return await page.$eval(selector, (el) => el.getAttribute(attr));
+    return await page.$eval(selector, (el) => el.src);
   } catch {
     return null;
   }
@@ -56,8 +56,7 @@ async function getScores(day, month, year) {
             
             const homeTeamLogo = await safeAttr(
                 page,
-                "div.ssrcss-bon2fo-WithInlineFallback-TeamHome img.ssrcss-1knyx38-BadgeImage",
-                "src"
+                "div.ssrcss-bon2fo-WithInlineFallback-TeamHome img.ssrcss-1knyx38-BadgeImage"
             );
             
             const homeScore = await safeText(
@@ -72,8 +71,7 @@ async function getScores(day, month, year) {
             
             const awayTeamLogo = await safeAttr(
                 page,
-                "div.ssrcss-nvj22c-WithInlineFallback-TeamAway img.ssrcss-1knyx38-BadgeImage",
-                "src"
+                "div.ssrcss-nvj22c-WithInlineFallback-TeamAway img.ssrcss-1knyx38-BadgeImage"
             );
             
             const awayTeam = await safeText(
