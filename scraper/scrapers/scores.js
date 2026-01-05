@@ -1,4 +1,25 @@
 const puppeteer = require("puppeteer");
+require("dotenv").config({path: "../../.env"});
+
+async function safeText(page, selector) {
+  try {
+    return await page.$eval(selector, (el) => el.textContent);
+  } catch {
+    return null;
+  }
+}
+
+async function safeAttr(page, selector, attr) {
+  try {
+    return await page.$eval(selector, (el) => el.getAttribute(attr));
+  } catch {
+    return null;
+  }
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 async function getScores(day, month, year) {
     const results = [];
@@ -12,7 +33,7 @@ async function getScores(day, month, year) {
     try {
         const page = await browser.newPage();
 
-        await page.goto(`https://www.bbc.com/sport/football/scores-fixtures/${year}-${month}-${day}`, {
+        await page.goto(`${process.env.LINK}/${year}-${month}-${day}`, {
             waitUntil: "networkidle2",
             timeout: 30000
         })
@@ -25,28 +46,50 @@ async function getScores(day, month, year) {
                 timeout: Math.ceil(Math.random() * 11000) + 20000
             });
 
-            const date = await page.$eval("time.ejf0oom1", el => el.textContent);
+            const date =  await safeText(page, "time.ejf0oom1");
 
-            const league = await page.$eval("div.ejf0oom0", el => el.textContent);
+            const league = await safeText(page, "div.ejf0oom0");
             
-            const homeTeam = await page.$eval("div.ssrcss-bon2fo-WithInlineFallback-TeamHome span.emlpoi30", el => el.textContent);
+            const homeTeam = await safeText(
+                page,
+                "div.ssrcss-bon2fo-WithInlineFallback-TeamHome span.emlpoi30"
+            );
             
-            const homeTeamLogo = await page.$eval("div.ssrcss-bon2fo-WithInlineFallback-TeamHome img.ssrcss-1knyx38-BadgeImage", el => el.src);
+            const homeTeamLogo = await safeAttr(
+                page,
+                "div.ssrcss-bon2fo-WithInlineFallback-TeamHome img.ssrcss-1knyx38-BadgeImage",
+                "src"
+            );
             
-            const homeScore = await page.$eval("div.ssrcss-y5s079-WithInlineFallback-Scores div.ssrcss-qsbptj-HomeScore", el => el.textContent);
+            const homeScore = await safeText(
+                page,
+                "div.ssrcss-y5s079-WithInlineFallback-Scores div.ssrcss-qsbptj-HomeScore"
+            );
             
-            const awayScore = await page.$eval("div.ssrcss-y5s079-WithInlineFallback-Scores div.ssrcss-fri5a2-AwayScore", el => el.textContent);
+            const awayScore = await safeText(
+                page,
+                "div.ssrcss-y5s079-WithInlineFallback-Scores div.ssrcss-fri5a2-AwayScore"
+            );
             
-            const awayTeamLogo = await page.$eval("div.ssrcss-nvj22c-WithInlineFallback-TeamAway img.ssrcss-1knyx38-BadgeImage", el => el.src);
+            const awayTeamLogo = await safeAttr(
+                page,
+                "div.ssrcss-nvj22c-WithInlineFallback-TeamAway img.ssrcss-1knyx38-BadgeImage",
+                "src"
+            );
             
-            const awayTeam = await page.$eval("div.ssrcss-nvj22c-WithInlineFallback-TeamAway span.emlpoi30", el => el.textContent);
+            const awayTeam = await safeText(
+                page,
+                "div.ssrcss-nvj22c-WithInlineFallback-TeamAway span.emlpoi30"
+            );
             
-            const venue = await page.$eval("div.ssrcss-x07iau-Venue", el => el.textContent);
+            await safeText(page, "div.ssrcss-x07iau-Venue");
+
+            const matchDay = new Date(time.trim());
+            const formattedDate = `${String(matchDay.getDate()).padStart(2,"0")}-${String(matchDay.getMonth() + 1).padStart(2, "0")}-${matchDay.getFullYear()}`;
 
             const match = {
                 matchId: matchId++,
-                date: date.trim(),
-                matchDay: new Date(date.trim()),
+                date: formattedDate,
                 league: league.trim(),
                 homeTeam: homeTeam.trim(),
                 homeTeamLogo: homeTeamLogo,
@@ -58,6 +101,8 @@ async function getScores(day, month, year) {
             }
 
             results.push(match);
+
+            await sleep(2000 + Math.random() * 2000);
         }
 
         return results;

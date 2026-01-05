@@ -1,11 +1,12 @@
 // import modules
 const express = require("express");
-const { getAllMatchResults } = require("../controllers/matchController");
+const { getAllMatchResults, getSpecificResults } = require("../controllers/matchController");
 
 // router initialization
 const router = express.Router();
 
 // implement paths
 router.get("/", getAllMatchResults);
+router.get("/specific", getSpecificResults);
 
 module.exports = router;
