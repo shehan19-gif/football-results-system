@@ -1,0 +1,33 @@
+// import modules
+require("dotenv").config({path: "../.env"});
+const express = require("express");
+const cors = require("cors");
+
+// import db connection
+const dbConnection = require("../shared/config/db-connection");
+dbConnection(process.env.CONNECTION_STRING)
+    .then(res => console.log("Connected to the db!"))
+    .catch(err => console.log("Error: ", err));
+
+// import routes
+const matchRoutes = require("./routes/matchRouter");
+
+// app initialization
+const app = express();
+
+// constants
+const PORT = process.env.PORT;
+
+// utility middlewares
+app.use(express.json());
+app.use(cors());
+
+// custom middlewares
+app.use("/football/v1/results", matchRoutes);
+
+// all other routes
+app.all("/{*splat}", (req, res) => {
+    return res.status(404).json({message: "404 - Page Not Found"});
+});
+
+app.listen(PORT, () => console.log(`App listening on PORT:${PORT}`));
