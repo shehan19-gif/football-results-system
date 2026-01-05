@@ -83,7 +83,7 @@ async function getScores(day, month, year) {
             
             await safeText(page, "div.ssrcss-x07iau-Venue");
 
-            const matchDay = new Date(time.trim());
+            const matchDay = new Date(date.trim());
             const formattedDate = `${String(matchDay.getDate()).padStart(2,"0")}-${String(matchDay.getMonth() + 1).padStart(2, "0")}-${matchDay.getFullYear()}`;
 
             const match = {
