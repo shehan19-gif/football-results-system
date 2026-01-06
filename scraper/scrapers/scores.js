@@ -22,7 +22,6 @@ function sleep(ms) {
 
 async function getScores(day, month, year) {
     const results = [];
-    let matchId = 0;
     
     const browser = await puppeteer.launch({
         headless: true,
@@ -85,7 +84,7 @@ async function getScores(day, month, year) {
             const formattedDate = `${String(matchDay.getDate()).padStart(2,"0")}-${String(matchDay.getMonth() + 1).padStart(2, "0")}-${matchDay.getFullYear()}`;
 
             const match = {
-                matchId: matchId++,
+                matchKey: `${formattedDate}_${homeTeam}`,
                 date: formattedDate,
                 league: league.trim(),
                 homeTeam: homeTeam.trim(),
