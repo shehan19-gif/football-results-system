@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/football/v1/results/:path*",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/api/football/v1/results",
+      "destination": "/api/index"
+    }
+  ]
+}
