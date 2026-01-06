@@ -37,7 +37,7 @@ async function getSpecificResults(req, res) {
       const data = await Match.find({
         $or: [{ homeTeam: queryTeam }, { awayTeam: queryTeam }],
         date: queryDate,
-      });
+      }).select("league homeTeam awayTeam homeScore awayScore date");
 
       return res.status(200).json({ matches: data });
     }
@@ -46,7 +46,7 @@ async function getSpecificResults(req, res) {
       const data = await Match.find({
         league: queryLeague,
         date: queryDate,
-      });
+      }).select("league homeTeam awayTeam homeScore awayScore date");
 
       return res.status(200).json({ matches: data });
     }
@@ -54,7 +54,7 @@ async function getSpecificResults(req, res) {
     if (queryTeam) {
       const data = await Match.find({
         $or: [{ homeTeam: queryTeam }, { awayTeam: queryTeam }],
-      });
+      }).select("league homeTeam awayTeam homeScore awayScore date");
 
       return res.status(200).json({ matches: data });
     }
@@ -62,7 +62,7 @@ async function getSpecificResults(req, res) {
     if (queryLeague) {
       const data = await Match.find({
         league: queryLeague,
-      });
+      }).select("league homeTeam awayTeam homeScore awayScore date");
 
       return res.status(200).json({ matches: data });
     }
@@ -70,7 +70,7 @@ async function getSpecificResults(req, res) {
     if (queryDate) {
       const data = await Match.find({
         date: queryDate,
-      });
+      }).select("league homeTeam awayTeam homeScore awayScore date");
 
       return res.status(200).json({ matches: data });
     }
