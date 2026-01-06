@@ -2,7 +2,7 @@
 
 ## Base URL
 ```
-/api/football/v1/results
+https://football-results-system.vercel.app/
 ```
 
 ## Endpoints
