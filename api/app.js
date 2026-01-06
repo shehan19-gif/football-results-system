@@ -16,18 +16,20 @@ const matchRoutes = require("./routes/matchRouter");
 const app = express();
 
 // constants
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
 
 // utility middlewares
 app.use(express.json());
 app.use(cors());
 
 // custom middlewares
-app.use("/football/v1/results", matchRoutes);
+app.use("/api/football/v1/results", matchRoutes);
 
 // all other routes
 app.all("/{*splat}", (req, res) => {
     return res.status(404).json({message: "404 - Page Not Found"});
 });
 
-app.listen(PORT, () => console.log(`App listening on PORT:${PORT}`));
+// app.listen(PORT, () => console.log(`App listening on PORT:${PORT}`));
+
+module.exports = app;
