@@ -1,3 +1,3 @@
 const app = require("./app");
 
-module.exports = app;
+export default app;
