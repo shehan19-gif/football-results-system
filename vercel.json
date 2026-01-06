@@ -1,19 +1,13 @@
 {
   "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "api/index.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/football/v1/results/(.*)",
-      "dest": "api/index.js"
+      "source": "/api/football/v1/results/:path*",
+      "destination": "/index.js"
     },
     {
-      "src": "/api/football/v1/results",
-      "dest": "api/index.js"
+      "source": "/api/football/v1/results",
+      "destination": "/index.js"
     }
   ]
 }
