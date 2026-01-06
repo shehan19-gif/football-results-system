@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/football/v1/results/(.*)",
+      "dest": "api/index.js"
+    },
+    {
+      "src": "/api/football/v1/results",
+      "dest": "api/index.js"
+    }
+  ]
+}
