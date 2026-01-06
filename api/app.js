@@ -24,6 +24,11 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
+// root path
+app.get("/", (req, res) => {
+    return res.sendFile(path.join(__dirname, "public", "api-docs.html"));
+});
+
 // custom middlewares
 app.use("/api/football/v1/results", matchRoutes);
 
