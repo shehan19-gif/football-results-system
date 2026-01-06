@@ -13,7 +13,7 @@ async function getAllMatchResults(req, res) {
     }
 
     const data = await Match.find()
-      .select("league homeTeam awayTeam homeScore awayScore date")
+      .select("matchKey league homeTeam awayTeam homeScore awayScore date")
       .skip(skip)
       .limit(limit)
       .lean();
