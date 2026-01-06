@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Results API Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        .api-docs {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: left;
+        }
+
+        .api-docs h2 {
+            color: #667eea;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .endpoint {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .endpoint-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .endpoint-url {
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+            font-size: 13px;
+            word-break: break-all;
+            background: #f0f0f0;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .section {
+            margin-top: 25px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .param-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .param-list li {
+            background: white;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .param-name {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .home-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .header p {
+                font-size: 16px;
+            }
+
+            .endpoint-url {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ Football Results API</h1>
+            <p>Complete API Documentation</p>
+        </div>
+
+        <div class="api-docs">
+            <h2>Available Endpoints</h2>
+
+            <div class="endpoint">
+                <div class="endpoint-title">Get All Match Results</div>
+                <div class="endpoint-url">GET /api/football/v1/results</div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-title">Get Match Results with Pagination</div>
+                <div class="endpoint-url">GET /api/football/v1/results?page=2</div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-title">Get Match Results with Custom Limit</div>
+                <div class="endpoint-url">GET /api/football/v1/results?page=1&limit=100</div>
+            </div>
+
+            <div class="section">
+                <h3>Specific Query Endpoints</h3>
+                
+                <div class="endpoint">
+                    <div class="endpoint-title">Search by Team</div>
+                    <div class="endpoint-url">GET /api/football/v1/results/specific?team="Manchester United"</div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">Search by League</div>
+                    <div class="endpoint-url">GET /api/football/v1/results/specific?league="Premier League"</div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">Search by Date</div>
+                    <div class="endpoint-url">GET /api/football/v1/results/specific?date="06-01-2026"</div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">Search by Team and Date</div>
+                    <div class="endpoint-url">GET /api/football/v1/results/specific?team="Manchester United"&date="06-01-2026"</div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">Search by League and Date</div>
+                    <div class="endpoint-url">GET /api/football/v1/results/specific?league="Premier League"&date="06-01-2026"</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Query Parameters</h3>
+                <ul class="param-list">
+                    <li><span class="param-name">page:</span> Page number (default: 1, min: 1)</li>
+                    <li><span class="param-name">limit:</span> Results per page (default: 50, min: 1, max: 100)</li>
+                    <li><span class="param-name">team:</span> Team name (use quotes: "Team Name")</li>
+                    <li><span class="param-name">league:</span> League name (use quotes: "League Name")</li>
+                    <li><span class="param-name">date:</span> Match date in DD-MM-YYYY format (use quotes: "06-01-2026")</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <a href="/api/football/v1/results" class="home-button">View All Results</a>
+        </div>
+    </div>
+</body>
+</html>
