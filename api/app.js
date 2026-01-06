@@ -22,11 +22,11 @@ const app = express();
 // utility middlewares
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 // root path
 app.get("/", (req, res) => {
-    return res.sendFile(path.join(__dirname, "public", "api-docs.html"));
+    return res.sendFile(path.join(__dirname, "../public", "api-docs.html"));
 });
 
 // custom middlewares
@@ -34,7 +34,7 @@ app.use("/api/football/v1/results", matchRoutes);
 
 // all other routes
 app.all("/{*splat}", (req, res) => {
-    return res.sendFile(path.join(__dirname, "public", "api-docs.html"));
+    return res.sendFile(path.join(__dirname, "../public", "api-docs.html"));
 });
 
 // app.listen(PORT, () => console.log(`App listening on PORT:${PORT}`));
