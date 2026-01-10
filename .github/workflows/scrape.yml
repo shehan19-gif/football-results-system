@@ -2,8 +2,8 @@ name: Daily Football Scraper
 
 on:
   schedule:
-    # Runs daily at 5:00 AM Sri Lanka time (23:30 UTC)
-    - cron: "30 23 * * *"
+    
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
